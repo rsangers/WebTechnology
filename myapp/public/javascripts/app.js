@@ -9,10 +9,12 @@ var main = function () {
         for(let j=0;j<6;j++){
             var $newTile=$("<div>");
             $newTile.id="t"+i*6+j;
+            console.log($('#'+$newTile.id));
             $newTile.addClass("tile");
             $newColumn.append($newTile);
         }
         $(".board").append($newColumn);
+
     }
 
     //Add column interactivity
