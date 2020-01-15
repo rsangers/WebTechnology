@@ -1,12 +1,29 @@
+.gamearea{
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  width:800px;
+  height:600px;
+  transform: translateX(-50%);
+  border-radius: 50px;
+  border: 3px solid #b3d1ff;
+  background-color: #e6f0ff;
+}
+
 .board {
-  width:500px;
-  height:450px;
+  position: relative;
+  top: 25px;
+  left: 50%;
+  width:504px;
+  height:435px;
+  transform: translateX(-50%);
 }
 .tile {
-  width: 69px;
-  height: 69px;
+  position: relative;
+  width: 55px;
+  height: 55px;
   text-align: center;
-  background-color: gray;
+  background-color: #80b3ff;
   border-radius: 50%;
 }
 .column:hover .tile:nth-last-of-type(1){
@@ -16,10 +33,9 @@
   opacity: 80%;
 }
 .column{
-  background-color: navy;
+  position: relative;
+  background-color: #4d94ff;
   float: left;
-  width: 69px;
+  width: 72px;
   height: 100%;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
 }
