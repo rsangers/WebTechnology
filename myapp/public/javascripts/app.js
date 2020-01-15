@@ -22,6 +22,23 @@ var main = function () {
         }
         $(".board").append($newColumn);
     }
+    $(".gamearea").append($(".board"));
+
+
+    for(let i=0; i<2;i=i+1)
+        var $newPlayer = $("<div>");
+        $newPlayer.id="p"+i;
+        $newPlayer.addClass("player");
+        $newPlayer.css({
+            left: 245+(i*200),
+            top: 500
+        })
+        $(".gamearea").append($newPlayer);
+
+    }
+
+    
+    
 
     //Add column interactivity
     $(".column").click(function() {
