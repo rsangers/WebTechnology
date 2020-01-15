@@ -25,7 +25,7 @@ var main = function () {
     $(".gamearea").append($(".board"));
 
 
-    for(let i=0; i<2;i=i+1)
+    for(let i=0; i<2;i=i+1){
         var $newPlayer = $("<div>");
         $newPlayer.id="p"+i;
         $newPlayer.addClass("player");
@@ -34,8 +34,7 @@ var main = function () {
             top: 500
         })
         $(".gamearea").append($newPlayer);
-
-    }
+    };
 
     
     
