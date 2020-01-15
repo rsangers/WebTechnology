@@ -10,11 +10,17 @@ var main = function () {
             var $newTile=$("<div>");
             $newTile.id="t"+i*6+j;
             console.log($('#'+$newTile.id));
+            $newTile.css({
+                top: 15+j*15,
+                left: 8
+            })
             $newTile.addClass("tile");
+            $newColumn.css({
+                left:0
+            })
             $newColumn.append($newTile);
         }
         $(".board").append($newColumn);
-
     }
 
     //Add column interactivity
