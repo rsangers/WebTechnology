@@ -40,9 +40,6 @@ var main = function () {
         if (i<1){$newPlayerTile.css({background: '#0059b3'})}
         $newPlayer.append($newPlayerTile);
 
-        //Counter
-
-
         //Name box
         var $newName = $("<p>");
         $newName.addClass("name");
@@ -53,7 +50,12 @@ var main = function () {
         
     };
 
-
+    
+    //Counter
+    var $newCounter = $("<p>");
+    $newCounter.addClass("counter");
+    $newCounter.text("10");
+    $(".gamearea").append($newCounter);
     
     
 

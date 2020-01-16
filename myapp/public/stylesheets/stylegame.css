@@ -45,11 +45,23 @@
 
 .name{
   width:110px;
-  position: relative;
-  top: -12px;
+  position: absolute;
+  top: 65px;
   text-align: center;
   font-family: candara;
-  font-style: bold;
+  font-weight: 500;
+}
+
+.counter{
+  position: relative;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: black;
+  font-family: candara;
+  font-weight: 500;
+  font-size: 50px;
+  text-align: center;
 }
 
 .column:hover .tile:nth-last-of-type(1){
