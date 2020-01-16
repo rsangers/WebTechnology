@@ -11,8 +11,8 @@ var main = function () {
             $newTile.id="t"+i*6+j;
             console.log($('#'+$newTile.id));
             $newTile.css({
-                top: 15+j*15,
-                left: 8
+                top: 10+j*10,
+                left: 7
             })
             $newTile.addClass("tile");
             $newColumn.css({
@@ -31,7 +31,6 @@ var main = function () {
         $newPlayer.addClass("player");
         $newPlayer.css({
             left: 205+(i*280),
-            top: 500
         });
 
         //Circle
