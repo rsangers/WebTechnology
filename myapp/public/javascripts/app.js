@@ -1,6 +1,6 @@
 var main = function () {
     "use strict";
-    
+
     //Create column and tile elements
     for(let i=0;i<7;i++){
         var $newColumn=$("<div>");
@@ -24,17 +24,36 @@ var main = function () {
     }
     $(".gamearea").append($(".board"));
 
-
+    //Add player segments
     for(let i=0; i<2;i=i+1){
         var $newPlayer = $("<div>");
         $newPlayer.id="p"+i;
         $newPlayer.addClass("player");
         $newPlayer.css({
-            left: 245+(i*200),
+            left: 205+(i*280),
             top: 500
-        })
+        });
+
+        //Circle
+        var $newPlayerTile = $("<div>");
+        $newPlayerTile.id="pt"+i;
+        $newPlayerTile.addClass("playertile");
+        if (i<1){$newPlayerTile.css({background: '#0059b3'})}
+        $newPlayer.append($newPlayerTile);
+
+        //Counter
+
+
+        //Name box
+        var $newName = $("<p>");
+        $newName.addClass("name");
+        $newName.text("name "+(i+1));
+        $newPlayer.append($newName);
+
         $(".gamearea").append($newPlayer);
+        
     };
+
 
     
     

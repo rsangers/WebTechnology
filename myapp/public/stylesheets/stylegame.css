@@ -29,11 +29,24 @@
 
 .player {
   position: absolute;
+  height: 150px;
+  width: 110px;
+}
+
+.playertile{
   height: 110px;
   width: 110px;
   border-radius: 55px;
   background-color: #003366;
 }
+.name{
+  width:110px;
+  position: relative;
+  top: 10px;
+  text-align: center;
+}
+
+
 .column:hover .tile:nth-last-of-type(1){
   opacity: 50%;
 }
@@ -42,7 +55,7 @@
 }
 .column{
   position: relative;
-  background-color: #0080ff;
+  background-color: #3399ff;
   float: left;
   width: 72px;
   height: 100%;
