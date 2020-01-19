@@ -201,6 +201,7 @@ var main = function () {
     
     var $popUp = $("<div>");
     $popUp.addClass("popUp");
+
     $popUp.text("Game Over");
     $(".gamearea").append($popUp);
   }
