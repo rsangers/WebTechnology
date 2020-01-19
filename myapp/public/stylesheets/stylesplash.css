@@ -12,7 +12,7 @@ body{
     text-align-last: center;
 }
 
-main p{
+main form{
     position: relative;
     width: 350px;
     left:25px;
@@ -20,9 +20,10 @@ main p{
 
 .playbutton{
     position: relative;
-    width: 20 px;
+    width: 400px;
     height: 50 px;
     top: 0px ;
+    left: -25px;
     background-color: #3399ff;
     border-color: black;
 

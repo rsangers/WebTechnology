@@ -17,12 +17,12 @@
         <div style="font-size:25px;">
           Start a game:
         </div>
-        <div class="playbutton">
-          <p>Against a friend</p>
-        </div>
-        <div class="playbutton">
-          <p>Find an opponent</p>
-        </div>
+        <form action="/game" method="get">
+          <button class="playbutton" type="submit">Against a friend</button>
+        </form>
+        <form action="/game" method="get">
+          <button class="playbutton" type="submit">Find an opponent</button>
+        </form>
       </main>
       <footer>
         By: Céline van Wassenhove & Ruben Sangers
