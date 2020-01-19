@@ -4,7 +4,7 @@ var turn=1;
 var main = function () {
     "use strict";
    
-    //Create column and tile elements
+    //Give attribute to each column keeping track of lowest free tile, and position the elements
     for(let i=1;i<=7;i++){
        $("#c"+i).attr("freeTile",6);
        $("#c"+i).css("left",0);
@@ -67,7 +67,7 @@ var main = function () {
 
           //Check if someone has won yet
           if(gameOver($(this).attr("id").replace('c',''),freeTile)){
-            console.log("Game over");
+            showGameOver();
           }
         }
     });
@@ -195,3 +195,12 @@ var main = function () {
     }
 
   };
+
+  function showGameOver(){
+    $(".board").css("opacity","50%");
+    
+    var $popUp = $("<div>");
+    $popUp.addClass("popUp");
+    $popUp.text("Game Over");
+    $(".gamearea").append($popUp);
+  }

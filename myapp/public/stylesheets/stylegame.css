@@ -73,6 +73,19 @@
   width: 70px;
   height: 100%;
 }
+.popUp{
+  position: absolute;
+  border: 3px solid #b3d1ff;
+  background-color: #e6f0ff;   
+  border-radius: 10%;
+  left: 300px;
+  top: 200px;
+  width: 200px;
+  height: 160px;
+  text-align: center;
+  font-family: candara;
+  font-weight: 500;
+}
 
 img{
   position: fixed;
