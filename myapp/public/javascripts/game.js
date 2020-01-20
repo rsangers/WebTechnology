@@ -225,4 +225,13 @@ var main = function () {
 
     $popUp.text("Game Over");
     $(".gamearea").append($popUp);
+
+    disableGameBoard();
+  }
+
+  function disableGameBoard(){
+    var columns=$(".column");
+    for(let i=0;i<columns.lenght;i++){
+      columns.item(i).className+=" columnDisabled";
+    }
   }
