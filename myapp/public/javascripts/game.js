@@ -45,8 +45,28 @@ var main = function () {
     //Counter
     var $newCounter = $("<p>");
     $newCounter.addClass("counter");
-    $newCounter.text("10");
     $(".gamearea").append($newCounter);
+    
+    //Count down
+    var timeLeft=10;
+    setInterval(function(){
+      $newCounter.css("font-size","50px");
+      $newCounter.css("top","0px");
+      $newCounter.text(timeLeft);
+      timeLeft--;
+      if(timeLeft==0){
+        $newCounter.css("font-size","15px");
+        $newCounter.css("top","50px");
+        $newCounter.text("Time due, other player next");
+        if(turn==1){
+          turn=2;
+        }
+        else{
+          turn=1;
+        }
+        timeLeft=10;
+      }
+    }, 1000);
 
     //Add column interactivity
     $(".column").click(function() {
@@ -69,6 +89,7 @@ var main = function () {
           if(gameOver($(this).attr("id").replace('c',''),freeTile)){
             showGameOver();
           }
+          timeLeft=10;
         }
     });
 
