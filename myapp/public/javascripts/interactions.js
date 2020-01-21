@@ -1,7 +1,7 @@
 //Global variable indicating whose turn it is (either 1 or 2)
 var turn=1;
 
-var main = function () {
+function GameState(socket) {
     "use strict";
    
     //Give attribute to each column keeping track of lowest free tile, and position the elements
@@ -84,6 +84,8 @@ var main = function () {
             turn=1;
           }
           $(this).attr("freeTile",freeTile-1);
+          let messageOut=$(this).attr("id");
+          socket.send(JSON.stringify(messageOut));
 
           //Check if someone has won yet
           if(gameOver($(this).attr("id").replace('c',''),freeTile)){
@@ -104,7 +106,7 @@ var main = function () {
     });
   }
 
-  $(document).ready(main);
+  //$(document).ready(main);
 
   function gameOver(myColumn,freeTile){
     var pColor;
@@ -230,8 +232,27 @@ var main = function () {
   }
 
   function disableGameBoard(){
-    var columns=$(".column");
-    for(let i=0;i<columns.lenght;i++){
-      columns.item(i).className+=" columnDisabled";
+    var columns=$(".column").map(function(){
+      return this;
+    }).get();
+    for(let i=0;i<columns.length;i++){
+      //$(columns[i]).toggleClass('column columnDisabled');
     }
   }
+
+  (function setUp(){
+    var socket=new WebSocket("ws://localhost:3000");
+    var gs=new GameState(socket);
+
+    socket.onmessage=function(event){
+      let messageIn=JSON.parse(event);
+      console.log(messageIn);
+    }
+    socket.onopen=function(){
+      socket.send("{}");
+    };
+    socket.onclose=function(){
+      //Check if game was aborted
+    };
+    socket.onerror=function(){};
+  })();
