@@ -8,8 +8,8 @@ var Game=function(gameID){
 Game.prototype.changeState=function(state){
     this.state=state;
 };
-Game.prototype.hasTwoPlayers = function() {
-    return this.gameState == "2 joined";
+Game.prototype.hasTwoConnectedPlayers = function() {
+    return this.state == "2 joined";
 };
 Game.prototype.addPlayer=function(player){
     if(this.state!="0 joined"&&this.state!="1 joined"){

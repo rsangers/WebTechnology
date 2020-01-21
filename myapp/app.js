@@ -7,9 +7,6 @@ var app = express();
 
 var Game=require("./mygame");
 
-app.use("/", function(req, res) {
-    res.sendFile("public/splash.html", {root: "./"});
-});
 app.use(express.static(__dirname + "/public"));
 
 app.get("/play", function(req, res){
@@ -19,7 +16,7 @@ app.get("/", function(req, res){
     res.sendFile("splash.html", { root: "./public" });
 });
 
-var server=http.createServer(app);
+var server=http.createServer(app).listen(port);
 const wss=new websocket.Server({server});
 
 var websockets={}; //property: websocket, value: game
@@ -60,7 +57,11 @@ wss.on("connection",function(ws){
    * if a player now leaves, the game is aborted (player is not preplaced)
    */
   if (thisGame.hasTwoConnectedPlayers()) {
+    console.log("Starting the game!");
     thisGame = new Game(2);
+  }
+  else{
+      console.log("Waiting for an opponent to join...");
   }
 
   /*
@@ -92,5 +93,3 @@ wss.on("connection",function(ws){
     }
     })
 });
-
-http.createServer(app).listen(port);
