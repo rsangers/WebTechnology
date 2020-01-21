@@ -57,11 +57,11 @@ wss.on("connection",function(ws){
    * if a player now leaves, the game is aborted (player is not preplaced)
    */
   if (thisGame.hasTwoConnectedPlayers()) {
-    con.send(JSON.stringify("Starting the game!"));
+    con.send(JSON.stringify("startgame"));
     thisGame = new Game(2);
   }
   else{
-    con.send(JSON.stringify("Waiting for an opponent to join..."));
+    con.send(JSON.stringify("wait"));
   }
 
   /*

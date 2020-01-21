@@ -7,6 +7,15 @@ function GameState(socket) {
   socket.onmessage=function(event){
     let messageIn=JSON.parse(event.data);
     console.log(messageIn);
+    if(messageIn=="wait"){
+      $(".gamearea").css("display","none");
+      $(".waitarea").css("display","block-inline");
+    }
+
+    if (messageIn=="startgame"){
+      $(".gamearea").css("display","block");
+      $(".waitarea").css("display","none");
+    }
   }
     //Give attribute to each column keeping track of lowest free tile, and position the elements
     for(let i=1;i<=7;i++){
