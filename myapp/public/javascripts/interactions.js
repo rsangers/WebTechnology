@@ -2,8 +2,12 @@
 var turn=1;
 
 function GameState(socket) {
-    "use strict";
-   
+  "use strict";
+  
+  socket.onmessage=function(event){
+    let messageIn=JSON.parse(event.data);
+    console.log(messageIn);
+  }
     //Give attribute to each column keeping track of lowest free tile, and position the elements
     for(let i=1;i<=7;i++){
        $("#c"+i).attr("freeTile",6);
@@ -244,10 +248,7 @@ function GameState(socket) {
     var socket=new WebSocket("ws://localhost:3000");
     var gs=new GameState(socket);
 
-    socket.onmessage=function(event){
-      let messageIn=JSON.parse(event);
-      console.log(messageIn);
-    }
+    
     socket.onopen=function(){
       socket.send("{}");
     };

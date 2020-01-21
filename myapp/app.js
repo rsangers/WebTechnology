@@ -57,11 +57,11 @@ wss.on("connection",function(ws){
    * if a player now leaves, the game is aborted (player is not preplaced)
    */
   if (thisGame.hasTwoConnectedPlayers()) {
-    console.log("Starting the game!");
+    con.send(JSON.stringify("Starting the game!"));
     thisGame = new Game(2);
   }
   else{
-      console.log("Waiting for an opponent to join...");
+    con.send(JSON.stringify("Waiting for an opponent to join..."));
   }
 
   /*
@@ -71,7 +71,7 @@ wss.on("connection",function(ws){
    *  3. send the message to OP
    */
   con.on("message", function incoming(message) {
-    let oMsg = JSON.parse(message);
+    let messageIn = JSON.parse(message);
 
     let gameObj = websockets[con.id];
 
