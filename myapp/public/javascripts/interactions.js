@@ -9,7 +9,7 @@ function GameState(socket) {
     console.log(messageIn);
     if(messageIn=="wait"){
       $(".gamearea").css("display","none");
-      $(".waitarea").css("display","block-inline");
+      $(".waitarea").css("display","block");
     }
 
     if (messageIn=="startgame"){

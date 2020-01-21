@@ -57,7 +57,9 @@ wss.on("connection",function(ws){
    * if a player now leaves, the game is aborted (player is not preplaced)
    */
   if (thisGame.hasTwoConnectedPlayers()) {
-    con.send(JSON.stringify("startgame"));
+    websockets[con.id].playerA.send(JSON.stringify("startgame"));
+    websockets[con.id].playerB.send(JSON.stringify("startgame"));
+
     thisGame = new Game(2);
   }
   else{
@@ -76,6 +78,9 @@ wss.on("connection",function(ws){
     let gameObj = websockets[con.id];
 
     //Here the server should forward the new gamestate to the other player
+    if(messageIn=="Lost turn"){
+        con.send(JSON.stringify())
+    }
   });
 
   con.on("close", function(code) {
