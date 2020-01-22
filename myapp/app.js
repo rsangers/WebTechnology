@@ -5,10 +5,12 @@ var websocket = require("ws");
 var port = process.argv[2];
 var app = express();
 
+//Use the game constructor of file 'mygame'
 var Game=require("./mygame");
 
 app.use(express.static(__dirname + "/public"));
 
+//Request activated when someone clicks one of the starting buttons of the splash screen
 app.get("/play", function(req, res){
     res.sendFile("game.html", { root: "./public" });
 });
@@ -16,34 +18,21 @@ app.get("/", function(req, res){
     res.sendFile("splash.html", { root: "./public" });
 });
 
+//Create the server
 var server=http.createServer(app).listen(port);
 const wss=new websocket.Server({server});
 
-var websockets={}; //property: websocket, value: game
+var websockets={}; //Array containing the websockets
 
-/*
- * regularly clean up the websockets object
- */
-setInterval(function() {
-    for (let i in websockets) {
-      if (Object.prototype.hasOwnProperty.call(websockets,i)) {
-        let gameObj = websockets[i];
-        //if the gameObj has a final status, the game is complete/aborted
-        if (gameObj.finalStatus != null) {
-          delete websockets[i];
-        }
-      }
-    }
-  }, 50000);
+//Start up the first game
+var gameID=1;
+var thisGame=new Game(gameID);
 
-  var thisGame=new Game(1);
-  var connectionID = 0; //each websocket receives a unique ID
+//Every websocket gets an ID number
+var connectionID = 0; //each websocket receives a unique ID
 
 wss.on("connection",function(ws){
-    /*
-   * two-player game: every two players are added to the same game
-   */
-  
+  //Upon connection, the player is added to the newest game
   let con = ws;
   con.id = connectionID++;
   let playerType = thisGame.addPlayer(con);
@@ -51,32 +40,21 @@ wss.on("connection",function(ws){
 
   console.log("Player "+con.id+" placed in game "+thisGame.id+" as "+playerType);
 
-  /*
-   * once we have two players, there is no way back;
-   * a new game object is created;
-   * if a player now leaves, the game is aborted (player is not preplaced)
-   */
+  //If a game is full, start the game for the two players and create a new empty game object
   if (thisGame.hasTwoConnectedPlayers()) {
     websockets[con.id].playerA.send(JSON.stringify("startgame"));
     websockets[con.id].playerB.send(JSON.stringify("startgame"));
-    websockets[con.id].playerA.send(JSON.stringify("newturn"));
+    websockets[con.id].playerA.send(JSON.stringify("newturn")); //Player A starts the game
 
-    thisGame = new Game(2);
+    gameID++;
+    thisGame = new Game(gameID);
   }
   else{
-    con.send(JSON.stringify("wait"));
+    con.send(JSON.stringify("wait")); //If there is only one player in the game, send the waiting screen
   }
 
-  /*
-   * message coming in from a player:
-   *  1. determine the game object
-   *  2. determine the opposing player OP
-   *  3. send the message to OP
-   */
   con.on("message", function incoming(message) {
     let messageIn = JSON.parse(message);
-
-    let gameObj = websockets[con.id];
 
     //Here the server should forward the new gamestate to the other player
     if(messageIn.type=="newgame"){
@@ -88,17 +66,8 @@ wss.on("connection",function(ws){
   });
 
   con.on("close", function(code) {
-    /*
-     * code 1001 means almost always closing initiated by the client;
-     * source: https://developer.mozilla.org/en-US/docs/Web/API/CloseEvent
-     */
     console.log(con.id + " disconnected ...");
+    //Implement code on what to do upon disconnection
 
-    if (code == "1001") {
-      /*
-       * if possible, abort the game; if not, the game is already completed
-       */
-      let gameObj = websockets[con.id];
-    }
     })
 });
