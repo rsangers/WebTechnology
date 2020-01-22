@@ -1,6 +1,3 @@
-//Global variable indicating whose turn it is (either 1 or 2)
-var turn=1;
-
 function GameState(socket) {
   "use strict";
   
@@ -15,6 +12,12 @@ function GameState(socket) {
     if (messageIn=="startgame"){
       $(".gamearea").css("display","block");
       $(".waitarea").css("display","none");
+      var outMessage={
+        data: "2",
+        type: "newgame"
+      };
+      console.log(outMessage.type);
+      socket.send(JSON.stringify(outMessage));
     }
   }
     //Give attribute to each column keeping track of lowest free tile, and position the elements
@@ -118,8 +121,6 @@ function GameState(socket) {
       $(this).find(".tile:nth-child("+freeTile+")").css("opacity", "100%");
     });
   }
-
-  //$(document).ready(main);
 
   function gameOver(myColumn,freeTile){
     var pColor;
@@ -244,6 +245,7 @@ function GameState(socket) {
     disableGameBoard();
   }
 
+  //This function should make interactivity impossible after someone has won
   function disableGameBoard(){
     var columns=$(".column").map(function(){
       return this;
@@ -253,6 +255,7 @@ function GameState(socket) {
     }
   }
 
+  //Sets up a websocket connection upon starting the game
   (function setUp(){
     var socket=new WebSocket("ws://localhost:3000");
     var gs=new GameState(socket);

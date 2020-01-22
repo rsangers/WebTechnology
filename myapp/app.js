@@ -59,6 +59,7 @@ wss.on("connection",function(ws){
   if (thisGame.hasTwoConnectedPlayers()) {
     websockets[con.id].playerA.send(JSON.stringify("startgame"));
     websockets[con.id].playerB.send(JSON.stringify("startgame"));
+    websockets[con.id].playerA.send(JSON.stringify("newturn"));
 
     thisGame = new Game(2);
   }
@@ -78,8 +79,11 @@ wss.on("connection",function(ws){
     let gameObj = websockets[con.id];
 
     //Here the server should forward the new gamestate to the other player
-    if(messageIn=="Lost turn"){
-        con.send(JSON.stringify())
+    if(messageIn.type=="newgame"){
+      console.log(messageIn.data);
+    }
+    else{
+      console.log(messageIn.type);
     }
   });
 
